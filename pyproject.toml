@@ -10,6 +10,7 @@ packages = [{include = "texture_scripts"}]
 python = "^3.9"
 librosa = "^0.10.0"
 soundfile = "^0.12.1"
+matplotlib = "^3.7.0"
 
 
 [build-system]
