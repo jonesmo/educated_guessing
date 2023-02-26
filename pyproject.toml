@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "texture-scripts"
+version = "0.1.0"
+description = ""
+authors = ["Molly Jones <mojones.e@gmail.com>"]
+readme = "README.md"
+packages = [{include = "texture_scripts"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+librosa = "^0.10.0"
+soundfile = "^0.12.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
