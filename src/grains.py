@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import soundfile as sf
+from load_audio import load_audio_file
 
 # grab one grain
 def make_one_grain(grain_length, output_file_name, audio_file, filelength, sample_rate, write_out):
@@ -14,3 +15,6 @@ def make_one_grain(grain_length, output_file_name, audio_file, filelength, sampl
         sf.write(audio_output_path, grain, sample_rate, subtype='PCM_24')
         print("Saved one grain to /grains!")
     return grain
+
+audio_file, sr, filelength = load_audio_file("texture_2", "i_1_full_interpolation.wav")
+single_grain = make_one_grain(15000, "test_grain.wav", audio_file, filelength, sr, True)
