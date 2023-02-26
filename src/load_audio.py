@@ -5,9 +5,9 @@ import librosa
 def load_audio_file(texture_folder, file_name):
     path_to_audio = os.path.join("..", texture_folder, file_name)
 
-    audio_file, sr = librosa.load(path_to_audio)
+    audio_data, sr = librosa.load(path_to_audio)
     filelength = len(audio_file)
-    return audio_file, sr, filelength
+    return audio_data, sr, filelength
 
 # load all audio files in directory
 def load_audio_dir(texture_folder):
