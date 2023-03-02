@@ -19,13 +19,13 @@ def load_audio_dir(texture_folder):
     i = 0
     audio_buffers = {}
     for file_name in files_in_folder:
-        audio_file, sr, filelength = load_audio_file(texture_folder, file_name)
+        audio_data, sr, filelength = load_audio_file(texture_folder, file_name)
 
-        key = i
-        value = { "sample_rate": sr, "file_length": filelength, "data": audio_file }
-        audio_buffers[key] = value
+        audio_buffers[i] = { "sample_rate": sr, "file_length": filelength, "data": audio_data }
         i += 1
     
     return num_audio_files, audio_buffers
 
-load_audio_dir("texture_2")
+# audio_file_num, buffers = load_audio_dir("texture_2")
+# print(audio_file_num)
+# print(buffers)
