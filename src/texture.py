@@ -18,7 +18,7 @@ from salad import noise_salad
 # repeat_grain(single_grain, 10, True, sr, "ten_in_a_row.wav")
 
 # ------ noise salad ------
-noise_salad("white_noise", 3, 0.5, True, "test_salad.wav")
+noise_salad("white_noise", 20, 0.5, True, "test_salad.wav")
 
 # create function that extends existing texture (texture_1)
 

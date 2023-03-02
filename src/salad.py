@@ -4,14 +4,14 @@ from scipy.io import wavfile
 from common.load_audio import load_audio_file, load_audio_dir
 from common.grains import make_one_grain, repeat_grain
 
-def noise_salad(audio_dir, passes=1, max_length=1, write_out=False, output_file_name=None):
+def noise_salad(audio_dir, length=10, max_length=1, write_out=False, output_file_name=None):
     num_audio_files, buffer_objs = load_audio_dir(audio_dir)
-    num_iterations = num_audio_files * passes
+    sr = buffer_objs[0]['sample_rate']
 
     salad_left = []
     salad_right = []
 
-    for buffer in range(num_iterations):
+    while len(salad_left) < length * sr:
         selected_file = np.random.randint(num_audio_files)
         audio_data = buffer_objs[selected_file]['data']
         sr = buffer_objs[selected_file]['sample_rate']
