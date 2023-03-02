@@ -25,7 +25,3 @@ def load_audio_dir(texture_folder):
         i += 1
     
     return num_audio_files, audio_buffers
-
-# audio_file_num, buffers = load_audio_dir("texture_2")
-# print(audio_file_num)
-# print(buffers)
