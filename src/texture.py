@@ -2,10 +2,12 @@ import os
 import numpy as np
 import librosa
 import soundfile as sf
+from scipy.io import wavfile
 from matplotlib import pyplot as plt
 from common.load_audio import load_audio_file, load_audio_dir
 from common.grains import make_one_grain, repeat_grain
 from salad import noise_salad, accordion_salad
+from extend import extend
 
 # ------ load audio ------
 # audio_file_num, buffers = load_audio_dir("texture_2")
@@ -22,8 +24,7 @@ from salad import noise_salad, accordion_salad
 # accordion_salad("accordion_salad", 20, 4, True, "test_accordion_salad.wav")
 
 # create function that extends existing texture (texture_1)
-audio_data, sr, filelength = load_audio_file("texture_1", "a_3_diffusion.wav")
-
+extend("texture_1", "a_3_diffusion.wav", 5, True, "test_extend.wav")
 
 
 # create function that repitches accordion samples
