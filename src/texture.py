@@ -19,7 +19,7 @@ from salad import noise_salad, accordion_salad
 
 # ------ noise salad ------
 # noise_salad("percussion", 20, 1, True, "test_salad.wav")
-accordion_salad("accordion", 20, 4, True, "text_accordion_salad.wav")
+accordion_salad("accordion", 60, 4, True, "test_accordion_salad.wav")
 
 # create function that extends existing texture (texture_1)
 
