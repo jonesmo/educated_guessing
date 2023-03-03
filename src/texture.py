@@ -18,10 +18,12 @@ from salad import noise_salad, accordion_salad
 # repeat_grain(single_grain, 10, True, sr, "ten_in_a_row.wav")
 
 # ------ noise salad ------
-# noise_salad("percussion", 20, 1, True, "test_salad.wav")
-accordion_salad("accordion", 60, 4, True, "test_accordion_salad.wav")
+# noise_salad("percussion_salad", 20, 1, True, "test_salad.wav")
+# accordion_salad("accordion_salad", 20, 4, True, "test_accordion_salad.wav")
 
 # create function that extends existing texture (texture_1)
+audio_data, sr, filelength = load_audio_file("texture_1", "a_3_diffusion.wav")
+
 
 
 # create function that repitches accordion samples

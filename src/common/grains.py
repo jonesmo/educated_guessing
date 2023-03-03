@@ -26,7 +26,7 @@ def make_one_repitched_grain(grain_length, audio_data, sample_rate, write_out=Fa
     
     # repitch the grain
     grain_np = np.array(grain)
-    steps_to_shift_pitch = np.random.randint(-36, 20)
+    steps_to_shift_pitch = np.random.randint(-36, 10)
     repitched_grain_np = librosa.effects.pitch_shift(grain_np, sr=sample_rate, n_steps=steps_to_shift_pitch)
     repitched_grain = repitched_grain_np.tolist()
 

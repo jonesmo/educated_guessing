@@ -34,8 +34,18 @@ def noise_salad(
             else np.random.randint(minimum_grain_length, len(audio_data))
         )
 
-        grain1 = make_one_grain(grain_length_left, audio_data, sr)
-        grain2 = make_one_grain(grain_length_right, audio_data, sr)
+        # silence random grains
+        grain_to_silence = np.random.choice([0, 1, 2], 1, p=[0.9, 0.05, 0.05])
+        if grain_to_silence == 0:
+            grain1 = make_one_grain(grain_length_left, audio_data, sr)
+            grain2 = make_one_grain(grain_length_right, audio_data, sr)
+        elif grain_to_silence == 1:
+            grain1 = [0.0] * grain_length_left
+            grain2 = make_one_grain(grain_length_right, audio_data, sr)
+        else:
+            grain1 = make_one_grain(grain_length_left, audio_data, sr)
+            grain2 = [0.0] * grain_length_right
+
         salad_left.extend(grain1)
         salad_right.extend(grain2)
     
@@ -90,11 +100,20 @@ def accordion_salad(
             else np.random.randint(minimum_grain_length, len(audio_data))
         )
 
-        grain1 = make_one_repitched_grain(grain_length_left, audio_data, sr)
-        grain2 = make_one_repitched_grain(grain_length_right, audio_data, sr)
+        # silence random grains
+        grain_to_silence = np.random.choice([0, 1, 2], 1, p=[0.9, 0.05, 0.05])
+        if grain_to_silence == 0:
+            grain1 = make_one_repitched_grain(grain_length_left, audio_data, sr)
+            grain2 = make_one_repitched_grain(grain_length_right, audio_data, sr)
+        elif grain_to_silence == 1:
+            grain1 = [0.0] * grain_length_left
+            grain2 = make_one_repitched_grain(grain_length_right, audio_data, sr)
+        else:
+            grain1 = make_one_repitched_grain(grain_length_left, audio_data, sr)
+            grain2 = [0.0] * grain_length_right
 
         # extract harmonic components of some of the grains
-        if np.random.choice([0, 1], 1, p=[0.7, 0.3]) == 0:
+        if np.random.choice([0, 1], 1, p=[0.85, 0.15]) == 0:
             grain1_np = np.array(grain1)
             grain2_np = np.array(grain2)
             just_harmonic1 = librosa.effects.harmonic(grain1_np)
@@ -106,7 +125,7 @@ def accordion_salad(
             grain2 = grain2_harmonic
 
         # reverse some of the grains
-        if np.random.choice([0, 1], 1, p=[0.4, 0.6]) == 0:
+        if np.random.choice([0, 1], 1, p=[0.5, 0.5]) == 0:
             grain1 = grain1[::-1]
             grain2 = grain2[::-1]
     
