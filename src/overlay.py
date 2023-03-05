@@ -1,6 +1,7 @@
 import os
 import math
 import soundfile as sf
+import numpy as np
 from extend import extend_from_data
 
 
@@ -75,13 +76,22 @@ def gradual_log_fade(
     extended_texture2, sr_unused2 = extend_from_data(texture2, sr, chunks_to_extend)
 
     fade_start_index = int(len(extended_texture1) * how_far_in_to_fade)
-    length_of_overlap = len(extended_texture1) - fade_start_index
+    length_to_end = len(extended_texture1) - fade_start_index
+    length_of_overlap = (
+        length_to_end
+        if len(extended_texture2) > length_to_end
+        else len(extended_texture2)
+    )
     overlap_region_of_texture1 = extended_texture1[-length_of_overlap:]
-    overlap_region_of_texture2 = extended_texture2[0:length_of_overlap]
+    overlap_region_of_texture2 = (
+        extended_texture2[0:length_of_overlap]
+        if len(extended_texture2) > length_of_overlap
+        else extended_texture2
+    )
 
     new_audio = extended_texture1[0:fade_start_index]
 
-    for j in range(length_of_overlap - 1):
+    for j in range(length_of_overlap):
         volume_increment = 1 / length_of_overlap
         texture1_at_volume = overlap_region_of_texture1[j] * (
             math.e ** (-j * volume_increment)

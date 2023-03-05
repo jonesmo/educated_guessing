@@ -60,8 +60,8 @@ single_grain = make_one_grain(15000, audio_data, sr)
 
 # ------ gradual logarithmic fade between two textures ------
 texture1, sr1 = short_pulse("nn_percussion", "p_199999_1sec_1.wav", 212, 10)
-# texture2, sr2 = noise_salad("percussion_salad", 20, 1)
-texture2, sr2 = repeat_grain(single_grain, 10, sr)
+texture2, sr2 = noise_salad("percussion_salad", 20, 1)
+# texture2, sr2 = repeat_grain(single_grain, 10, sr)
 
 if sr1 != sr2:
     raise Exception("Sample rates do not match.")
