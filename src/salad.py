@@ -35,7 +35,8 @@ def noise_salad(
         )
 
         # silence random grains
-        grain_to_silence = np.random.choice([0, 1, 2], 1, p=[0.9, 0.05, 0.05])
+        # grain_to_silence = np.random.choice([0, 1, 2], 1, p=[0.9, 0.05, 0.05])
+        grain_to_silence = np.random.choice([0, 1, 2], 1, p=[0.8, 0.1, 0.1])
         if grain_to_silence == 0:
             grain1 = make_one_grain(grain_length_left, audio_data, sr)
             grain2 = make_one_grain(grain_length_right, audio_data, sr)
