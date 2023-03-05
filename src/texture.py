@@ -9,7 +9,7 @@ from common.grains import make_one_grain, repeat_grain
 from salad import noise_salad, accordion_salad
 from extend import extend, extend_from_data
 from pulse import grain_hold, short_pulse
-from overlay import total_overlay
+from overlay import total_overlay, gradual_linear_fade
 
 # ------ load audio ------
 # audio_file_num, buffers = load_audio_dir("texture_2")
@@ -17,8 +17,9 @@ from overlay import total_overlay
 # print(buffers)
 
 # ------ grains ------
-# audio_data, sr, filelength = load_audio_file("texture_2", "i_1_full_interpolation.wav")
+audio_data, sr, filelength = load_audio_file("texture_2", "i_1_full_interpolation.wav")
 # single_grain = make_one_grain(15000, audio_data, sr, True, "test_grain.wav")
+single_grain = make_one_grain(15000, audio_data, sr)
 # repeat_grain(single_grain, 10, True, sr, "ten_in_a_row.wav")
 
 # ------ noise salad ------
@@ -49,10 +50,13 @@ from overlay import total_overlay
 
 # ------ gradual shift between two textures ------
 texture1, sr1 = short_pulse("nn_percussion", "p_199999_1sec_1.wav", 212, 10)
-texture2, sr2 = noise_salad("percussion_salad", 20, 1, True, "test_salad.wav")
+# texture2, sr2 = noise_salad("percussion_salad", 20, 1)
+texture2, sr2 = repeat_grain(single_grain, 10, sr)
 
-extended_texture1 = extend_from_data(texture1, sr1, 5)
-extended_texture2 = extend_from_data(texture2, sr2, 5)
+if sr1 != sr2:
+    raise Exception("Sample rates do not match.")
+
+fade = gradual_linear_fade(texture1, texture2, sr1, 10, 0.15, True, "test_fade.wav")
 
 # create function that generates repetitive, minimalist, slowly evolving texture
 

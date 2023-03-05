@@ -49,7 +49,7 @@ def extend_from_data(
 ):
     filelength = len(audio_data)
 
-    original_audio_data = audio_data.tolist()
+    original_audio_data = audio_data
     new_audio = original_audio_data
 
     for chunk in range(num_chunks):
@@ -62,10 +62,13 @@ def extend_from_data(
         ending_sample = starting_sample + chunk_length
 
         # find zero-crossing to start and end chunk
-        for i in range(4000):
+        zero_crossing_search_length = int(
+            sr * 0.25 if filelength > sr * 2 else filelength * 0.3
+        )
+        for i in range(zero_crossing_search_length):
             if original_audio_data[starting_sample + i] == 0.0:
                 starting_sample = starting_sample + i
-        for j in range(4000):
+        for j in range(zero_crossing_search_length):
             if original_audio_data[ending_sample - i] == 0.0:
                 ending_sample = ending_sample - i
         interpolation_chunk = original_audio_data[starting_sample:ending_sample]
