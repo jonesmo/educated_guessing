@@ -48,7 +48,7 @@ def noise_salad(
 
         salad_left.extend(grain1)
         salad_right.extend(grain2)
-    
+
     # make salad_left and salad_right the same length
     left_length = len(salad_left)
     right_length = len(salad_right)
@@ -69,7 +69,7 @@ def noise_salad(
         wavfile.write(audio_output_path, sr, salad_stereo)
         print("Saved noise salad!")
 
-    return salad
+    return salad[0], sr
 
 
 def accordion_salad(
@@ -128,11 +128,9 @@ def accordion_salad(
         if np.random.choice([0, 1], 1, p=[0.5, 0.5]) == 0:
             grain1 = grain1[::-1]
             grain2 = grain2[::-1]
-    
-        
+
         salad_left.extend(grain1)
         salad_right.extend(grain2)
-
 
     # make salad_left and salad_right the same length
     left_length = len(salad_left)
@@ -156,4 +154,4 @@ def accordion_salad(
         wavfile.write(audio_output_path, sr, salad_stereo)
         print("Saved accordion salad!")
 
-    return salad
+    return salad[0], sr

@@ -27,6 +27,8 @@ def grain_hold(
         sf.write(audio_output_path, pulse_audio, sr, subtype="PCM_24")
         print("Saved held grain audio file to /pulse!")
 
+    return pulse_audio, sr
+
 
 def short_pulse(
     audio_dir, filename, tempo, length, write_out=False, output_file_name=None
@@ -48,3 +50,5 @@ def short_pulse(
         audio_output_path = os.path.join("generated", "pulse", output_file_name)
         sf.write(audio_output_path, pulse_audio, sr, subtype="PCM_24")
         print("Saved pulse audio file to /pulse!")
+
+    return pulse_audio, sr
