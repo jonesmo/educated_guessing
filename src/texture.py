@@ -17,9 +17,9 @@ from overlay import total_overlay, gradual_linear_fade, gradual_log_fade
 # print(buffers)
 
 # ------ grains ------
-audio_data, sr, filelength = load_audio_file("texture_2", "i_1_full_interpolation.wav")
+# audio_data, sr, filelength = load_audio_file("texture_2", "i_1_full_interpolation.wav")
 # single_grain = make_one_grain(15000, audio_data, sr, True, "test_grain.wav")
-single_grain = make_one_grain(15000, audio_data, sr)
+# single_grain = make_one_grain(15000, audio_data, sr)
 # repeat_grain(single_grain, 10, True, sr, "ten_in_a_row.wav")
 
 # ------ noise salad ------
@@ -28,6 +28,7 @@ single_grain = make_one_grain(15000, audio_data, sr)
 
 # ------ extend ------
 # extend("texture_3", "i_2_full_interpolation_trimmed_2.wav", 10, True, "test_extend.wav")
+# extend("texture_6", "i_4_church_bells_trimmed.wav", 10, True, "test_extend.wav")
 
 # ------ pulse -------
 # grain_hold("texture_4", "p_7_diffusion.wav", 120, 10, True, "test_grain_hold.wav")
@@ -43,10 +44,13 @@ single_grain = make_one_grain(15000, audio_data, sr)
 # texture2, sr2 = short_pulse("nn_percussion", "p_199999_1sec_1.wav", 212, 10)
 # texture2, sr2 = accordion_salad("accordion_salad", 7, 4)
 
-# if sr1 != sr2:
-#     raise Exception("Sample rates do not match.")
+texture1, sr1 = extend("texture_3", "i_2_full_interpolation_trimmed_2.wav", 20)
+texture2, sr2 = extend("texture_4", "i_6_full_interpolation_trimmed_1.wav", 4)
 
-# overlay = total_overlay(texture1, texture2, sr1, True, "test_overlay.wav")
+if sr1 != sr2:
+    raise Exception("Sample rates do not match.")
+
+overlay = total_overlay(texture1, texture2, sr1, True, "test_overlay.wav")
 
 # ------ gradual linear fade between two textures ------
 # texture1, sr1 = short_pulse("nn_percussion", "p_199999_1sec_1.wav", 212, 10)
