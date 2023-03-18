@@ -108,3 +108,54 @@ def gradual_log_fade(
         print("Saved fade audio file to /fades!")
 
     return new_audio, sr
+
+
+def gradual_log_fade_without_extend(
+    texture1,
+    texture2,
+    sr,
+    how_far_in_to_fade,
+    write_out=False,
+    output_file_name=None,
+):
+    if isinstance(texture1, np.ndarray):
+        texture1_data = texture1.tolist()
+    else:
+        texture1_data = texture1
+
+    if isinstance(texture2, np.ndarray):
+        texture2_data = texture2.tolist()
+    else:
+        texture2_data = texture2
+
+    fade_start_index = int(len(texture1_data) * how_far_in_to_fade)
+    length_to_end = len(texture1_data) - fade_start_index
+    length_of_overlap = (
+        length_to_end if len(texture2_data) > length_to_end else len(texture2_data)
+    )
+    overlap_region_of_texture1 = texture1_data[-length_of_overlap:]
+    overlap_region_of_texture2 = (
+        texture2_data[0:length_of_overlap]
+        if len(texture2_data) > length_of_overlap
+        else texture2_data
+    )
+
+    new_audio = texture1_data[0:fade_start_index]
+
+    for j in range(length_of_overlap):
+        volume_increment = 1 / length_of_overlap
+        texture1_at_volume = overlap_region_of_texture1[j] * (
+            math.e ** (-j * volume_increment)
+        )
+        texture2_at_volume = overlap_region_of_texture2[j] * (j * volume_increment)
+        audio_sample = texture1_at_volume + texture2_at_volume
+        new_audio.extend([audio_sample])
+
+    new_audio.extend(texture2_data[length_of_overlap:])
+
+    if write_out:
+        audio_output_path = os.path.join("generated", "fades", output_file_name)
+        sf.write(audio_output_path, new_audio, sr, subtype="PCM_24")
+        print("Saved fade audio file to /fades!")
+
+    return new_audio, sr

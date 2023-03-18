@@ -33,7 +33,6 @@ def extend(audio_dir, filename, num_chunks, write_out=False, output_file_name=No
         part_two = interpolation_chunk
         part_three = new_audio[wedge_location : len(new_audio)]
 
-        # make stereo
         new_audio = part_one + part_two + part_three
 
     if write_out:
@@ -49,7 +48,11 @@ def extend_from_data(
 ):
     filelength = len(audio_data)
 
-    original_audio_data = audio_data
+    if isinstance(audio_data, np.ndarray):
+        original_audio_data = audio_data.tolist()
+    else:
+        original_audio_data = audio_data
+
     new_audio = original_audio_data
 
     for chunk in range(num_chunks):
@@ -78,7 +81,6 @@ def extend_from_data(
         part_two = interpolation_chunk
         part_three = new_audio[wedge_location : len(new_audio)]
 
-        # make stereo
         new_audio = part_one + part_two + part_three
 
     if write_out:

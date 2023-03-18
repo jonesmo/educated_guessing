@@ -5,6 +5,5 @@
 
 ### For slow movt:
 
-* fade from extend_5 to overlay_2
-* fade that to i_4_spliced
-* extend_2 with extend_5 ?
+* fade_3 into texture_2/p_1_diffusion or texture_1/p_4_diffusion OR MOST LIKELY extended p_6_diffusion_1
+* that into texture_2/i_1_interpolation?
