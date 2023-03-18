@@ -14,7 +14,6 @@ from overlay import (
     gradual_linear_fade,
     gradual_log_fade,
     gradual_log_fade_without_extend,
-    stereo_overlay,
 )
 
 # ------ load audio ------
@@ -45,16 +44,6 @@ from overlay import (
 # extend("texture_3", "i_2_full_interpolation_trimmed_2.wav", 10, True, "test_extend.wav")
 # extend("texture_6", "i_4_church_bells_trimmed.wav", 10, True, "test_extend.wav")
 # extend("movt_1_tentative", "p_7_diffusion.wav", 10, True, "test_extend.wav")
-
-# ------ stereo extend --------
-texture_L, srL = extend("texture_1", "a_3_diffusion_L.wav", 10)
-texture_R, srR = extend("texture_1", "a_3_diffusion_R.wav", 10)
-print("srL: ", srL)
-
-if srL != srR:
-    raise Exception("Sample rates do not match.")
-
-stereo_overlay(texture_L, texture_R, srL, True, "text_stereo_extend.wav")
 
 # ------ pulse -------
 # grain_hold("texture_4", "p_7_diffusion.wav", 120, 10, True, "test_grain_hold.wav")
