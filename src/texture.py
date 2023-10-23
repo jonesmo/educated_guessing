@@ -18,7 +18,10 @@ from overlay import (
 )
 
 # ------ load audio ------
-# audio_file_num, buffers = load_audio_dir("texture_2")
+cwd = os.getcwd()
+dir_to_load = os.path.join(cwd, "sound_sources")
+
+# audio_file_num, buffers = load_audio_dir(dir_to_load)
 # print(audio_file_num)
 # print(buffers)
 
@@ -40,6 +43,7 @@ from overlay import (
 #     True,
 #     "test_extended_salad.wav",
 # )
+noise_salad(dir_to_load, 20, 1, True, "test_salad.wav")
 
 # ------ extend ------
 # extend("texture_3", "i_2_full_interpolation_trimmed_2.wav", 10, True, "test_extend.wav")
@@ -47,14 +51,14 @@ from overlay import (
 # extend("movt_1_tentative", "p_7_diffusion.wav", 10, True, "test_extend.wav")
 
 # ------ stereo extend --------
-texture_L, srL = extend("texture_1", "a_3_diffusion_L.wav", 10)
-texture_R, srR = extend("texture_1", "a_3_diffusion_R.wav", 10)
-print("srL: ", srL)
+# texture_L, srL = extend("texture_1", "a_3_diffusion_L.wav", 10)
+# texture_R, srR = extend("texture_1", "a_3_diffusion_R.wav", 10)
+# print("srL: ", srL)
 
-if srL != srR:
-    raise Exception("Sample rates do not match.")
+# if srL != srR:
+#     raise Exception("Sample rates do not match.")
 
-stereo_overlay(texture_L, texture_R, srL, True, "text_stereo_extend.wav")
+# stereo_overlay(texture_L, texture_R, srL, True, "text_stereo_extend.wav")
 
 # ------ pulse -------
 # grain_hold("texture_4", "p_7_diffusion.wav", 120, 10, True, "test_grain_hold.wav")
